@@ -22,12 +22,20 @@ p {
   text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
 }
 
-.content {
+.content-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 70vh;
+  justify-content: flex-end;
+  height: 50vh;
+}
+
+.results-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 30vh;
 }
 
 .instructions {
@@ -56,6 +64,25 @@ button:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
 }
 
+button:disabled {
+  opacity: 0.2;
+  box.shadow: 0;
+  transform: none;
+}
+
 .selection p {
-  font-size: 1rem;
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 1rem;
+}
+
+.roundResult {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.finalResult {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 1.5rem;
 }

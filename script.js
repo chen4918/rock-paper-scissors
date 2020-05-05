@@ -12,6 +12,22 @@ const playerSelectText = document.querySelector('#playerSelect');
 const computerSelectText = document.querySelector('#computerSelect');
 const roundResultText = document.querySelector('.roundResult');
 const finalResultText = document.querySelector('.finalResult');
+const btns = document.querySelectorAll('.button-container button');
+
+rock.addEventListener('click', (e) =>{
+    playerSelection = 'rock';
+    game();
+})
+
+paper.addEventListener('click', (e) => {
+  playerSelection = 'paper';
+  game();
+})
+
+scissors.addEventListener('click', (e) => {
+  playerSelection = 'scissors';
+  game();
+})
 
 function computerPlay() {
   let result = Math.random();
@@ -25,6 +41,27 @@ function computerPlay() {
   }
 }
 
+function disableBtns() {
+  btns.forEach((btn) => {
+    btn.disabled = true;
+  });
+}
+
+function game() {
+  playRound(playerSelection, computerSelection);
+  playerSpan.textContent = playerScore;
+  computerSpan.textContent = computerScore;
+  roundResultText.textContent = roundResult;
+
+  if (playerScore === 5) {
+    finalResultText.textContent = "YOU WIN!";
+    disableBtns();
+  } else if (computerScore === 5) {
+    finalResultText.textContent = "YOU LOSE!";
+    disableBtns();
+  }
+}
+
 function playRound(playerSelection, computerSelection) {
   computerSelection = computerPlay();
   playerSelectText.textContent = 'The player chose ' + playerSelection + '.';
@@ -33,7 +70,7 @@ function playRound(playerSelection, computerSelection) {
   if (playerSelection === computerSelection) {
     roundResult = 'Draw!';
     return;
-  }
+  };
 
   if (playerSelection == 'rock') {
     if (computerSelection == 'paper') {
@@ -44,7 +81,7 @@ function playRound(playerSelection, computerSelection) {
       playerScore++;
       roundResult = 'You win! Rock smashes scissors!';
     }
-  }
+  };
 
   if (playerSelection == 'paper') {
     if (computerSelection == 'scissors') {
@@ -55,7 +92,7 @@ function playRound(playerSelection, computerSelection) {
       playerScore++;
       roundResult = 'You win! Paper covers rock!';
     }
-  }
+  };
 
   if (playerSelection == 'scissors') {
     if (computerSelection == 'rock') {
@@ -66,34 +103,6 @@ function playRound(playerSelection, computerSelection) {
       playerScore++;
       roundResult = 'You win! Scissors cuts paper!';
     }
-  }
+  };
 
 }
-
-function game() {
-  playRound();
-  playerSpan.textContent = playerScore;
-  computerSpan.textContent = computerScore;
-  roundResultText.textContent = roundResult;
-
-  if (playerScore === 5) {
-    finalResultText.textContent = "YOU WIN!";
-  } else if (computerScore === 5) {
-    finalResultText.textContent = "YOU LOSE!";
-  }
-}
-
-rock.addEventListener('click', (e) => {
-  playerSelection = 'rock';
-  game();
-})
-
-paper.addEventListener('click', (e) => {
-  playerSelection = 'paper';
-  game();
-})
-
-scissors.addEventListener('click', (e) => {
-  playerSelection = 'scissors';
-  game();
-})
