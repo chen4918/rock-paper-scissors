@@ -47,6 +47,37 @@ function disableBtns() {
   });
 }
 
+function enableBtns() {
+  btns.forEach((btn) => {
+    btn.disabled = false;
+  });
+}
+
+function reset() {
+  playerSelection = '';
+  computerSelection = '';
+  playerScore = 0;
+  computerScore = 0;
+  playerSpan.textContent = playerScore;
+  computerSpan.textContent = computerScore;
+}
+
+function playAgain() {
+  const playAgainBtn = document.createElement('button');
+  roundResult = '';
+  playerSelectText.textContent = '';
+  computerSelectText.textContent = '';
+  roundResultText.textContent = roundResult;
+  playAgainBtn.textContent = 'Play Again';
+  roundResultText.appendChild(playAgainBtn);
+  playAgainBtn.addEventListener('click', (e) => {
+    enableBtns();
+    reset();
+    roundResultText.removeChild(playAgainBtn);
+    finalResultText.textContent = '';
+  });
+}
+
 function game() {
   playRound(playerSelection, computerSelection);
   playerSpan.textContent = playerScore;
@@ -56,9 +87,11 @@ function game() {
   if (playerScore === 5) {
     finalResultText.textContent = "YOU WIN!";
     disableBtns();
+    playAgain();
   } else if (computerScore === 5) {
     finalResultText.textContent = "YOU LOSE!";
     disableBtns();
+    playAgain();
   }
 }
 
